@@ -4,7 +4,7 @@ let categoryFilter = {
 
     render: async function(){
         // DONT display filter if user is authenticated
-        if (data.user.getCredential() !== null){
+        if (authentication.isLogged()){
             return;
         }
 

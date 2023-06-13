@@ -24,9 +24,11 @@ data.works = {
     },
 
     deleteWork:async function(workId){
-        if (await api.works.deleteWork(data.user.getCredential(), workId)){
+        if (await api.works.deleteWork(workId)){
             var index = this.works.findIndex(work => work.id === workId);
             this.works.splice(index, 1);
+            return true;
         }
+        return false;
     }
 }

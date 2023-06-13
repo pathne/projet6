@@ -49,7 +49,7 @@ var login = {
             if (response.ok){
                 try {
                     var credential = await response.json()
-                    data.user.setCredential(credential);
+                    authentication.setCredential(credential);
                     window.location.href = 'index.html';
                 }
                 catch (err){

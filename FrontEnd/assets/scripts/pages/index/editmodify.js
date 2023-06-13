@@ -14,7 +14,7 @@
 let editModify = {
     render: function(){
         // display modify button only if user is authenticated
-        if (data.user.getCredential() === null){
+        if (!authentication.isLogged()){
             return;
         }
 

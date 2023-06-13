@@ -13,7 +13,8 @@ api.works = {
         return null
     },
 
-    deleteWork: async function(credential, id){
+    deleteWork: async function(id){
+        var credential = authentication.getCredential();
         try {
             const response = await fetch('http://localhost:5678/api/works/'+id, {
                 method: "DELETE",
@@ -26,7 +27,7 @@ api.works = {
                 return true
             }
             else if (response.status === 401){
-                notifier.notify({what:'authorizationExpired'})
+                notifier.notify({what:'authenticationExpired'})
             }
             else {
                 notifier.notify({what:'editFetchError'})
