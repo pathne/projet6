@@ -1,0 +1,2 @@
+
+notifier.notify({what:'init'});
