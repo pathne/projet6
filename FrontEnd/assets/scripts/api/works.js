@@ -14,7 +14,7 @@ api.works = {
     },
 
     deleteWork: async function(id){
-        var credential = authentication.getCredential();
+        const credential = authentication.getCredential();
         try {
             const response = await fetch('http://localhost:5678/api/works/'+id, {
                 method: "DELETE",
@@ -38,4 +38,4 @@ api.works = {
         }
         return false
     }
-};
+}

@@ -11,7 +11,14 @@
 */
 
 let editErrorHandler = {
+    isDisplayed: {},
+
     displayError: function(message, actionText, action){
+        if (this.isDisplayed[message]){
+            return;
+        }
+        this.isDisplayed[message] = true;
+
         var div = document.createElement('div')
         div.className = 'edit-error-modal-background'
 
@@ -31,6 +38,7 @@ let editErrorHandler = {
         div3.addEventListener('click', (e)=>{
             e.preventDefault()
             document.body.removeChild(div)
+            this.isDisplayed[message] = false;
             if (action){
                 action();
             }

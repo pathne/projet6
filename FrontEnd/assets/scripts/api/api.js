@@ -1,4 +1,2 @@
 
-let api = {
-    editPending: false
-};
+let api = {}

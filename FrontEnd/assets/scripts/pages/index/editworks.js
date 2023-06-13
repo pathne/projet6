@@ -43,6 +43,8 @@ let editWorks = {
     modal: null,
     worksContainer: null,
 
+    deletePendings: {},
+
     createModal: function(){
         // modal background
         document.body.appendChild(this.modalBackground = this.renderModalBackground())
@@ -161,9 +163,14 @@ let editWorks = {
     },
 
     deleteWork: async function(workId){
+        if (this.deletePendings[workId]){
+            return
+        }
+        this.deletePendings[workId] = true
         if (await data.works.deleteWork(workId)){
             notifier.notify({what:'worksChanged'})
         }
+        delete this.deletePendings[workId]
     },
 
     onEvent: function(e){
