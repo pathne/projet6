@@ -36,12 +36,12 @@ var categoryFilter = {
 
     onEvent: function(e){
         if (e.what === 'init'){
-            this.render();
+            this.render()
         }
         else if (e.what === 'categoryFilterChanged'){
-            this.render();
+            this.render()
         }
     }
-};
+}
 
-notifier.addListener(categoryFilter);
+notifier.addListener(categoryFilter)
