@@ -14,7 +14,7 @@ var login = {
     },
 
     render: function(){
-        document.getElementById('login-submit').disabled = this.loginPending
+        document.getElementById('login-submit').disabled = this.pending
         let error = document.getElementById('login-error')
         error.style.display = this.error?'block':'none'
         error.innerText = this.error || ''

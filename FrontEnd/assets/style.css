@@ -48,11 +48,13 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
-    background-color: #FFFEF8;
+}
+
+.container {
+    max-width: 1140px;
+	margin:auto;
 }
 
 header {
@@ -100,6 +102,12 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+body {
+    background-color: #FFFEF8;
+    position: relative;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -123,10 +131,49 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+#portfolio {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+    position: relative;
 }
+
+.filters {
+    margin-top: 51px;
+    margin-bottom: 51px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.filter {
+    box-sizing: border-box;
+    min-width: 100px;
+    padding: 9px 14px 9px 14px;
+    font-family: 'Syne';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    color: #1D6154;
+    line-height: 19px;
+    border: 1px solid #1D6154;
+    border-radius: 60px;
+    cursor: pointer;
+}
+
+.filter-on {
+    color: white;
+	background-color: #1D6154;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -182,48 +229,22 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
+footer {
+    background-color: white;
+}
+
 footer nav ul {
+    height:60px;
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+    align-items: center;
+	margin: 2em 107px 0 2em;
 }
 
-/*
-index.html category filter
-*/
 
-.filters {
-    margin-top: 51px;
-    margin-bottom: 51px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
 
-.filter {
-    box-sizing: border-box;
-    min-width: 100px;
-    padding: 9px 14px 9px 14px;
-    font-family: 'Syne';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    text-align: center;
-    color: #1D6154;
-    line-height: 19px;
-    border: 1px solid #1D6154;
-    border-radius: 60px;
-    cursor: pointer;
-}
+/* login page */
 
-.filter-on {
-    color: white;
-	background-color: #1D6154;
-}
-
-/*
-login.html
-*/
 
 #login {
     max-width: 380px;
@@ -275,4 +296,232 @@ login.html
     color: rgb(255,50,50);
     display: none;
     text-align: center;
+}
+
+/* edit index page */
+
+.edit-header {
+    display: block;
+}
+
+.edit-header-visible {
+    height: 59px;
+    font-family: 'Work Sans';
+    font-style: normal;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-header i {
+    font-size: 20px;
+    color: white;
+}
+
+.edit-header p {
+    margin-left: 9px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: white;
+}
+
+.edit-header-publish {
+    margin-left: 21px;
+    padding: 11px 23px 11px 23px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    background-color: white;
+    border-radius: 60px;
+}
+
+#edit-project {
+    cursor: pointer;
+    margin-left: 16px;
+    padding: 0 15px 0 15px;
+    position:absolute;
+    left: 100%;
+    top: 0px;
+    bottom: 0px;
+    display: flex;
+    align-items: center;
+}
+
+#edit-project:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+
+#edit-project i {
+
+    font-size: 20px;
+}
+
+#edit-project p {
+    margin-left: 8px;
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+/*
+edit works modal
+*/
+
+#edit-works-modal-background {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1;
+}
+
+#edit-works-modal-background > div {
+    position: absolute;
+    left: 0px;
+    top: 59px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba(0,0,0,0.3);
+    display: flex;
+    align:items: center;
+}
+
+#edit-works-modal-container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+}
+
+#edit-works-modal-container > div {
+    box-sizing: border-box;
+    position: relative;
+    width: 66%;
+    max-width: 631px;
+    z-index: 100;
+    padding: 0 0 0 0;
+    display: flex;
+    align-items: stretch;
+}
+
+#edit-works-modal {
+    box-sizing: border-box;
+    position: relative;
+    margin: 0 0 0 0;
+    padding: 60px 105px 48px 105px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    background-color: white;
+}
+
+#edit-works-modal > h2 {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 30px;
+    color: black;
+    margin: 0 0 0 0;
+}
+
+.edit-works-close {
+    position: absolute;
+    right: 38px;
+    top: 32px;
+    font-size: 20px;
+    color: black;
+}
+
+#edit-works {
+    margin-top: 46px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.edit-work-item {
+    position: relative;
+    width: 77px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-work-item img {
+    width: 77px;
+    height: 102px;
+    object-fit: cover;
+}
+
+.edit-work-trash-can {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    padding: 4px;
+    font-size: 9px;
+    color: white;
+    background-color: black;
+}
+
+.edit-work-trash-can:hover {
+    /*background-color: rgb(50,50,50);
+    border: 2px solid black;
+    right: 4px;
+    top: 4px;*/
+    color: rgb(200,200,200);
+}
+
+.edit-work-item p {
+    cursor: pointer;
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    padding: 2px 2px 2px 2px;
+}
+
+.edit-work-item p:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+
+.separator {
+    width: 100%;
+    margin-top: 46px;
+    height: 10px;
+    border-top: 1px solid #B3B3B3;
+}
+
+.edit-work-add-button {
+    margin-top: 38px;
+    padding: 10px 52px 10px 52px;
+    font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	text-align: center;
+    border: none;
+	border-radius: 60px ;
+}
+
+.edit-work-delete-galery {
+    margin-top: 21px;
+    padding: 2px 20px 2px 20px;
+    font-family: 'Syne';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #D65353;
+    border: none;
+    background: none;
 }
