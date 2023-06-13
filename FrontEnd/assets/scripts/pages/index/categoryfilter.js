@@ -1,5 +1,5 @@
 
-var categoryFilter = {
+let categoryFilter = {
     categoryId: -1,
 
     render: async function(){

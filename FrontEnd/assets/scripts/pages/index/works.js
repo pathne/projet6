@@ -1,5 +1,5 @@
 
-var works = {
+let works = {
     render: async function(){
         let container = document.getElementById('works')
         container.innerHTML = ''
