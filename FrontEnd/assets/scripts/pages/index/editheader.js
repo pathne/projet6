@@ -11,7 +11,7 @@
 
 let editHeader = {
     render: function(){
-        // if not authenticated dont display header
+        // display header only if user is authenticated
         if (data.user.getCredential() === null){
             return;
         }

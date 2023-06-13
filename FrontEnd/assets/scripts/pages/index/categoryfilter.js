@@ -3,6 +3,11 @@ let categoryFilter = {
     categoryId: -1,
 
     render: async function(){
+        // DONT display filter if user is authenticated
+        if (data.user.getCredential() !== null){
+            return;
+        }
+
         let container = document.getElementById('category-filter')
         container.innerHTML = ''
 
