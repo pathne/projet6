@@ -376,7 +376,6 @@ edit works modal
 */
 
 #edit-works-modal-background {
-    display: none;
     position: absolute;
     left: 0px;
     top: 0px;
@@ -401,7 +400,7 @@ edit works modal
     top: 0px;
     left: 0px;
     right: 0px;
-    display: none;/*flex;*/
+    display: flex;
     justify-content: center;
 }
 

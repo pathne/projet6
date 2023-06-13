@@ -3,7 +3,7 @@ data.works = {
     works:null,
 
     getWorks:async function (){
-        return this.works || (this.works = api.works.getWorks())
+        return this.works || (this.works = await api.works.getWorks())
     },
 
     getWorksCategories:async function (){
