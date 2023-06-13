@@ -43,8 +43,6 @@ let editWorks = {
     modal: null,
     worksContainer: null,
 
-    editPending: false,
-
     createModal: function(){
         // modal background
         document.body.appendChild(this.modalBackground = this.renderModalBackground())
@@ -124,28 +122,19 @@ let editWorks = {
     },
 
     renderWorks: async function(){
-        try{
-            let works = await data.works.getWorks()
-
-            this.worksContainer.innerHTML = '';
-
-            works.forEach(work => {
-                this.worksContainer.appendChild(this.renderWork(work))
-            })
+        let works = await data.works.getWorks()
+        if (works === null){
+            // in case of error, dont display anything
+            return;
         }
-        catch (err){
-            console.log(err);
-            // in case of data error, dont display anything
-        }
+
+        this.worksContainer.innerHTML = '';
+
+        works.forEach(work => {
+            this.worksContainer.appendChild(this.renderWork(work))
+        })
     },
 
-    /*
-    <article class="edit-work-item">
-        <img src="./assets/images/abajour-tahina.png" alt="">
-        <i class="fa-solid fa-trash-can edit-work-trash-can"></i>
-        <p>éditer</p>
-    </article>
-    */
     renderWork: function(work){
         let article = document.createElement('article')
         article.className = "edit-work-item"
@@ -159,6 +148,11 @@ let editWorks = {
         i.className = 'fa-solid fa-trash-can edit-work-trash-can'
         article.appendChild(i)
 
+        i.addEventListener('click', (e)=>{
+            e.preventDefault()
+            this.deleteWork(work.id)
+        })
+
         let p = document.createElement('p')
         p.innerText = 'éditer'
         article.appendChild(p)
@@ -166,9 +160,18 @@ let editWorks = {
         return article
     },
 
+    deleteWork: async function(workId){
+        if (await data.works.deleteWork(workId)){
+            notifier.notify({what:'worksChanged'})
+        }
+    },
+
     onEvent: function(e){
         if (e.what === 'editWorks'){
             this.createModal()
+            this.renderWorks()
+        }
+        else if (e.what === 'worksChanged'){
             this.renderWorks()
         }
     }

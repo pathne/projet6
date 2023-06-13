@@ -4,20 +4,19 @@ let works = {
         let container = document.getElementById('works')
         container.innerHTML = ''
 
-        try{
-            let works = await data.works.getWorks()
-            let showCategoryId = categoryFilter.categoryId;
-
-            works = showCategoryId === -1?works:works.filter(item => item.categoryId === showCategoryId)
-
-            works.forEach(work => {
-                container.appendChild(this.renderWork(work))
-            })
+        let works = await data.works.getWorks()
+        if (works === null){
+            // in case of error, dont display anything
+            return;
         }
-        catch (err){
-            console.log(err);
-            // in case of data error, dont display anything
-        }
+
+        let showCategoryId = categoryFilter.categoryId;
+
+        works = showCategoryId === -1?works:works.filter(item => item.categoryId === showCategoryId)
+
+        works.forEach(work => {
+            container.appendChild(this.renderWork(work))
+        })
     },
 
     renderWork: function(work){
@@ -41,6 +40,9 @@ let works = {
         }
         else if (e.what === 'categoryFilterChanged'){
             this.render();
+        }
+        else if (e.what === 'worksChanged'){
+            this.render()
         }
     }
 }

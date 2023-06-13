@@ -8,6 +8,9 @@ data.works = {
 
     getWorksCategories:async function (){
         const works = await this.getWorks()
+        if (works === null){
+            return null
+        }
         let uniques = new Map()
         works.forEach(work => {
             uniques.set(work.category.id, work.category)
@@ -18,5 +21,12 @@ data.works = {
         }
         categories.sort((a, b) => a.id - b.id)
         return categories
+    },
+
+    deleteWork:async function(workId){
+        if (await api.works.deleteWork(data.user.getCredential(), workId)){
+            var index = this.works.findIndex(work => work.id === workId);
+            this.works.splice(index, 1);
+        }
     }
 }

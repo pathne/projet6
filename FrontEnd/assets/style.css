@@ -529,3 +529,40 @@ edit works modal
     border: none;
     background: none;
 }
+
+/*
+edit error modal
+*/
+
+.edit-error-modal-background {
+    z-index: 101;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.edit-error-modal {
+    padding: 20px 50px 20px 50px;
+    font-size: 16px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+}
+
+.edit-error-modal-button {
+    padding: 8px 20px 8px 20px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: none;
+	border-radius: 5px;
+}

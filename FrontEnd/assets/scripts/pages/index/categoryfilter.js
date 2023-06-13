@@ -11,18 +11,17 @@ let categoryFilter = {
         let container = document.getElementById('category-filter')
         container.innerHTML = ''
 
-        try {
-            const categories = await data.works.getWorksCategories()
-
-            container.appendChild(this.renderCategory({id:-1, name:'Tous'}))
-
-            categories.forEach(category => {
-                container.appendChild(this.renderCategory(category))
-            })
+        const categories = await data.works.getWorksCategories()
+        if (categories === null){
+            // in case error, dont display anything
+            return
         }
-        catch (err){
-            // in case of data error, dont display anything
-        }
+
+        container.appendChild(this.renderCategory({id:-1, name:'Tous'}))
+
+        categories.forEach(category => {
+            container.appendChild(this.renderCategory(category))
+        })
     },
 
     renderCategory: function(category){
@@ -44,6 +43,9 @@ let categoryFilter = {
             this.render()
         }
         else if (e.what === 'categoryFilterChanged'){
+            this.render()
+        }
+        else if (e.what === 'worksChanged'){
             this.render()
         }
     }

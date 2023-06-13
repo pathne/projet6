@@ -5,6 +5,12 @@ data.user = {
     },
 
     getCredential: function(credential){
-        return window.sessionStorage.getItem("credential") || null;
+        try{
+            return JSON.parse(window.sessionStorage.getItem("credential")) || null;
+        }
+        catch (err){
+            window.sessionStorage.setItem("credential", null);
+            return null;
+        }
     }
 };
