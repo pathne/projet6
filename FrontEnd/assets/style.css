@@ -186,3 +186,35 @@ footer nav ul {
 	margin: 2em
 }
 
+/*
+index.html category filter
+*/
+
+.filters {
+    margin-top: 51px;
+    margin-bottom: 51px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.filter {
+    box-sizing: border-box;
+    min-width: 100px;
+    padding: 9px 14px 9px 14px;
+    font-family: 'Syne';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    color: #1D6154;
+    line-height: 19px;
+    border: 1px solid #1D6154;
+    border-radius: 60px;
+    cursor: pointer;
+}
+
+.filter-on {
+    color: white;
+	background-color: #1D6154;
+}
