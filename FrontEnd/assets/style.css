@@ -446,6 +446,14 @@ edit works modal
     color: black;
 }
 
+.edit-works-back {
+    position: absolute;
+    left: 38px;
+    top: 32px;
+    font-size: 20px;
+    color: black;
+}
+
 #edit-works {
     margin-top: 46px;
     display: flex;
@@ -565,4 +573,114 @@ edit error modal
     color: black;
     border: none;
 	border-radius: 5px;
+}
+
+/*
+edit add photo
+*/
+
+#edit-works-modal form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#add-file {
+    margin-top: 46px;
+    margin-bottom: 30px;
+    width: 100%;
+    height: 169px;
+    background: #E8F1F7;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#add-file i {
+    margin-top: 20px;
+    font-size: 58px;
+    color: #B9C5CC
+}
+
+#add-file input {
+    display: none;
+}
+
+#add-file button {
+    margin-top: 18px;
+    padding: 10px 33px 10px 33px;
+    background: #CBD6DC;
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    border: none;
+    border-radius: 50px;
+}
+
+#add-file p {
+    margin-top: 7px;
+    margin-bottom: 19px;
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+}
+
+#add-file img {
+    height: 169px;
+}
+
+.inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+}
+
+.add-photo-input {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-photo-input label {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    color: #3D3D3D;
+}
+
+.add-photo-input input, select {
+    box-sizing: border-box;
+    padding: 3px 10px 3px 10px;
+    height: 51px;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #444444;
+}
+
+.add-photo-validate {
+    margin-top: 22px;
+    min-width: 237px;
+    padding: 10px 52px 10px 52px;
+    font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background: #A7A7A7;
+	text-align: center;
+    border: none;
+	border-radius: 60px ;
 }
