@@ -8,5 +8,8 @@ const strings = {
     editFetchError: "Désolé, l'envoie de la requête au serveur a échoué.",
     ok: 'ok',
     authorizationExpired: 'Désolé, votre session authentifiée a expiré',
-    relog: "Se logger à nouveau"
+    relog: "Se logger à nouveau",
+
+    // add project
+    editAddPhotoFieldsRequired: "Pour pouvoir ajouter un projet, la photo, le titre et la catégorie sont requis."
 }

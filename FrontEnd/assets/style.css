@@ -605,7 +605,7 @@ edit add photo
 }
 
 #add-file input {
-    display: none;
+    /*display: none;*/
 }
 
 #add-file button {
@@ -683,4 +683,8 @@ edit add photo
 	text-align: center;
     border: none;
 	border-radius: 60px ;
+}
+
+.add-photo-validate-enabled {
+    background-color: #1D6154;
 }

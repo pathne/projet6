@@ -25,10 +25,29 @@ data.works = {
 
     deleteWork:async function(workId){
         if (await api.works.deleteWork(workId)){
-            var index = this.works.findIndex(work => work.id === workId);
-            this.works.splice(index, 1);
+            let index = this.works.findIndex(work => work.id === workId)
+            this.works.splice(index, 1)
             return true;
         }
         return false;
+    },
+
+    addWork:async function(file, title, categoryId){
+        let result = await api.works.addWork(file, title, categoryId)
+        if (!result){
+            return false;
+        }
+        let categories = await data.categories.getCategories()
+        let category = categories.find(category => category.id === parseInt(result.categoryId))
+        let work = {
+            id: result.id,
+            title: result.title,
+            imageUrl: result.imageUrl,
+            categoryId: category.id,
+            userId: result.userId,
+            category: category
+        }
+        this.works.push(work)
+        return true
     }
 }

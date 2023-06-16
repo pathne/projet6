@@ -56,6 +56,9 @@ let editErrorHandler = {
                 window.location.href = "./login.html"
             });
         }
+        else if (e.what === 'addPhotoFieldsRequiredError'){
+            this.displayError(strings.editAddPhotoFieldsRequired, strings.ok, null);
+        }
     }
 }
 

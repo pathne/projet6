@@ -33,7 +33,18 @@
 */
 
 let addPhoto = {
-    renderModal: function(){
+    imagePreview: null,
+
+    fileInput: null,
+    titleInput: null,
+    categoriesSelect: null,
+    submitButton: null,
+
+    isFormValid: false,
+
+    renderModal: async function(){
+        let categories = await data.categories.getCategories();
+
         let content = editModal.initModal({what:'showEditWorksModal'})
 
         let h2 = document.createElement('h2')
@@ -43,22 +54,36 @@ let addPhoto = {
         let form = document.createElement('form')
         form.action = '#'
 
+        let input = document.createElement('input')
+        input.type = 'file'
+        input.accept = '.png,.jpg'
+        input.hidden = true
+        form.appendChild(input)
+
+        this.fileInput = input;
+        input.addEventListener('input', (e)=>{
+            this.previewImageFile()
+            this.updateFormValidity()
+        });
+
         let div = document.createElement('div')
         div.id = 'add-file'
         form.appendChild(div)
+
+        this.imagePreview = div;
 
         let i = document.createElement('i')
         i.className = "fa-regular fa-image"
         div.appendChild(i)
 
-        let input = document.createElement('input')
-        input.type = 'file'
-        input.accept = '.png,.jpg'
-        div.appendChild(input)
-
         let button = document.createElement('button')
         button.innerText = '+ Ajouter photo'
         div.appendChild(button)
+
+        button.addEventListener('click', (e)=>{
+            e.preventDefault();
+            this.fileInput.click();
+        });
 
         let p = document.createElement('p')
         p.innerText = 'jpg, png : 4 mo max'
@@ -82,6 +107,9 @@ let addPhoto = {
         input.type = 'text'
         div2.appendChild(input)
 
+        this.titleInput = input;
+        input.addEventListener('input', this.updateFormValidity.bind(this));
+
         div2 = document.createElement('div')
         div2.className = 'add-photo-input'
         div.appendChild(div2)
@@ -95,21 +123,71 @@ let addPhoto = {
         select.id = 'input-category'
         div2.appendChild(select)
 
+        this.categoriesSelect = select;
+        select.addEventListener('input', this.updateFormValidity.bind(this));
+
         let option = document.createElement('option')
-        option.value = 1
-        option.innerText = 'Objets'
+        option.value = -1
+        option.innerText = ''
+        option.selected = true
         select.appendChild(option)
+
+        if (categories){
+            categories.forEach(category => {
+                let option = document.createElement('option')
+                option.value = category.id
+                option.innerText = category.name
+                select.appendChild(option)
+            });
+        }
 
         div = document.createElement('div')
         div.className = 'separator'
         form.appendChild(div)
 
         button = document.createElement('button')
+
         button.className = 'add-photo-validate'
         button.innerText = 'Valider'
         form.appendChild(button)
 
+        this.submitButton = button;
+        button.addEventListener('click', (e)=>{
+            e.preventDefault()
+            this.addWork()
+        })
+
         content.appendChild(form)
+    },
+
+    previewImageFile: function(){
+        this.imagePreview.innerHTML = '';
+        let img = document.createElement('img');
+        img.src = URL.createObjectURL(this.fileInput.files[0]);
+        img.alt = 'image du projet';
+        this.imagePreview.appendChild(img);
+    },
+
+    updateFormValidity: function(){
+        var isFormValid =
+            this.fileInput.files.length > 0 &&
+            this.titleInput.value.trim().length > 0 &&
+            parseInt(this.categoriesSelect.value, 10) !== -1
+        if (this.isFormValid !== isFormValid){
+            this.isFormValid = isFormValid;
+            this.submitButton.className = this.isFormValid?'add-photo-validate add-photo-validate-enabled':'add-photo-validate'
+        }
+    },
+
+    addWork: async function(){
+        if (!this.isFormValid){
+            notifier.notify({what:'addPhotoFieldsRequiredError'});
+            return;
+        }
+        if (await data.works.addWork(this.fileInput.files[0], this.titleInput.value.trim(), parseInt(this.categoriesSelect.value))){
+            notifier.notify({what:'worksChanged'})
+            notifier.notify({what:'showEditWorksModal'})
+        }
     },
 
     onEvent: function(e){
