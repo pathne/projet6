@@ -34,7 +34,7 @@ let editModify = {
 
         div.addEventListener('click', (e)=>{
             e.preventDefault();
-            notifier.notify({what:'editWorks'});
+            notifier.notify({what:'showEditWorksModal'});
         });
     },
 

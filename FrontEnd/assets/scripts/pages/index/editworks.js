@@ -1,22 +1,13 @@
 
 /*
-************ modalBackground ***********
-...
-
-<div id="edit-works-modal-background">
-    <div></div>
-</div>
-
-</body>
-
-*********** modal *********
-
 <section id="portfolio">
     ...
     <div id="edit-works-modal-container">
         <div>
             <section id="edit-works-modal">
-                <i class="fa-solid fa-xmark edit-works-close"></i>
+                ...
+
+                *********** edit works modal content *********
                 <h2>Galerie photo</h2>
                 <div id="edit-works">
 
@@ -31,96 +22,49 @@
                 <div class="separator"></div>
                 <button class="edit-work-add-button">Ajouter une photo</button>
                 <button class="edit-work-delete-galery">Supprimer la galerie</button>
+
             </section>
         </div>
     </div>
 <section>
-
 */
 
 let editWorks = {
-    modalBackground: null,
-    modal: null,
     worksContainer: null,
 
     deletePendings: {},
 
-    createModal: function(){
-        // modal background
-        document.body.appendChild(this.modalBackground = this.renderModalBackground())
-        // modal
-        document.getElementById('portfolio').appendChild(this.modal = this.renderModal())
-    },
-
-    destroyModal: function(){
-        document.getElementById('portfolio').removeChild(this.modal)
-        document.body.removeChild(this.modalBackground)
-
-        this.worksContainer = null
-        this.modal = null
-        this.modalBackground = null
-    },
-
-    renderModalBackground: function(){
-        var div0 = document.createElement('div')
-        div0.id = 'edit-works-modal-background'
-
-        var div1 = document.createElement('div')
-        div0.appendChild(div1)
-
-        div0.addEventListener('click', (e)=>{
-            e.preventDefault()
-            this.destroyModal()
-        })
-
-        return div0
-    },
-
     renderModal: function(){
-        var container = document.createElement('div')
-        container.id = 'edit-works-modal-container'
-
-        var div = document.createElement('div')
-        container.appendChild(div)
-
-        var section = document.createElement('section')
-        section.id = 'edit-works-modal'
-        div.appendChild(section)
-
-        var i = document.createElement('i')
-        i.className = 'fa-solid fa-xmark edit-works-close'
-        section.appendChild(i)
-
-        i.addEventListener('click', (e)=>{
-            e.preventDefault()
-            this.destroyModal()
-        })
+        let content = editModal.initModal(false)
 
         var h2 = document.createElement('h2')
         h2.innerText = 'Galerie photo'
-        section.appendChild(h2)
+        content.appendChild(h2)
 
         var div = document.createElement('div')
         div.id = "edit-works"
-        section.appendChild(div)
+        content.appendChild(div)
 
         this.worksContainer = div
 
         var div = document.createElement('div')
         div.className = 'separator'
-        section.appendChild(div)
+        content.appendChild(div)
 
         var button = document.createElement('button')
         button.className = 'edit-work-add-button'
         button.innerText = 'Ajouter une photo'
-        section.appendChild(button)
+        content.appendChild(button)
+
+        button.addEventListener('click', (e)=>{
+            e.preventDefault()
+            notifier.notify({what: 'showAddPhotoModal'})
+        });
 
         var button = document.createElement('button')
         button.className = 'edit-work-delete-galery'
         button.innerText = 'Supprimer la galerie'
-        section.appendChild(button)
-
-        return container
+        content.appendChild(button)
     },
 
     renderWorks: async function(){
@@ -174,8 +118,8 @@ let editWorks = {
     },
 
     onEvent: function(e){
-        if (e.what === 'editWorks'){
-            this.createModal()
+        if (e.what === 'showEditWorksModal'){
+            this.renderModal()
             this.renderWorks()
         }
         else if (e.what === 'worksChanged'){
