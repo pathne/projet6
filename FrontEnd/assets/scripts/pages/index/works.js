@@ -1,7 +1,7 @@
 
 let works = {
     render: async function(){
-        let container = document.getElementById('works')
+        const container = document.getElementById('works')
         container.innerHTML = ''
 
         let works = await data.works.getWorks()
@@ -10,7 +10,7 @@ let works = {
             return;
         }
 
-        let showCategoryId = categoryFilter.categoryId;
+        const showCategoryId = categoryFilter.categoryId
 
         works = showCategoryId === -1?works:works.filter(item => item.categoryId === showCategoryId)
 
@@ -20,14 +20,14 @@ let works = {
     },
 
     renderWork: function(work){
-        let img = document.createElement('img')
+        const img = document.createElement('img')
         img.src = work.imageUrl
         img.alt = work.title
 
-        let figcaption = document.createElement('figcaption')
+        const figcaption = document.createElement('figcaption')
         figcaption.innerHTML = work.title
 
-        let figure = document.createElement('figure')
+        const figure = document.createElement('figure')
         figure.appendChild(img)
         figure.appendChild(figcaption)
 
@@ -36,10 +36,10 @@ let works = {
 
     onEvent: function(e){
         if (e.what === 'init'){
-            this.render();
+            this.render()
         }
         else if (e.what === 'categoryFilterChanged'){
-            this.render();
+            this.render()
         }
         else if (e.what === 'worksChanged'){
             this.render()

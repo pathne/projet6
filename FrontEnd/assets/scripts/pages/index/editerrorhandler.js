@@ -15,9 +15,9 @@ let editErrorHandler = {
 
     displayError: function(message, actionText, action){
         if (this.isDisplayed[message]){
-            return;
+            return
         }
-        this.isDisplayed[message] = true;
+        this.isDisplayed[message] = true
 
         var div = document.createElement('div')
         div.className = 'edit-error-modal-background'
@@ -40,7 +40,7 @@ let editErrorHandler = {
             document.body.removeChild(div)
             this.isDisplayed[message] = false;
             if (action){
-                action();
+                action()
             }
         });
 
@@ -49,15 +49,15 @@ let editErrorHandler = {
 
     onEvent: function(e){
         if (e.what === 'editFetchError'){
-            this.displayError(strings.editFetchError, strings.ok, null);
+            this.displayError(strings.editFetchError, strings.ok, null)
         }
         else if (e.what === 'authorizationExpired'){
             this.displayError(strings.authorizationExpired, strings.relog, ()=>{
                 window.location.href = "./login.html"
-            });
+            })
         }
         else if (e.what === 'addPhotoFieldsRequiredError'){
-            this.displayError(strings.editAddPhotoFieldsRequired, strings.ok, null);
+            this.displayError(strings.editAddPhotoFieldsRequired, strings.ok, null)
         }
     }
 }

@@ -1,5 +1,14 @@
 
 let authentication = {
+    login: async function(email, password){
+        const credential =  await api.users.login(email, password)
+        if (credential){
+            this.setCredential(credential)
+            return true
+        }
+        return false
+    },
+
     isLogged: function(){
         return this.getCredential() !== null
     },

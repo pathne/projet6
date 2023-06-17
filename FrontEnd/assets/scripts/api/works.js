@@ -40,15 +40,13 @@ api.works = {
     },
 
     addWork: async function(file, title, category){
-        const formData = new FormData();
-        formData.append('image', file);
-        formData.append('title', title);
-        formData.append('category', category);
+        const formData = new FormData()
+        formData.append('image', file)
+        formData.append('title', title)
+        formData.append('category', category)
 
-        const credential = authentication.getCredential();
+        const credential = authentication.getCredential()
         try {
-            console.log(credential);
-            console.log('BLO');
             const response = await fetch('http://localhost:5678/api/works', {
                 method: "POST",
                 cache: "no-cache",
@@ -56,7 +54,7 @@ api.works = {
                     "Authorization":'Bearer ' + credential.token
                 },
                 body: formData
-            });
+            })
             if (response.ok){
                 return await response.json()
             }

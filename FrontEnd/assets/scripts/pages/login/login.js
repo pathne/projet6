@@ -4,18 +4,16 @@ var login = {
     error: null,
 
     init: function(){
-        let form = document.getElementById('login-form')
+        const form = document.getElementById('login-form')
         form.addEventListener('submit', (e)=>{
             e.preventDefault()
-            if (!this.pending){
-                notifier.notify({what:'doLogin'})
-            }
+            this.doLogin()
         })
     },
 
     render: function(){
         document.getElementById('login-submit').disabled = this.pending
-        let error = document.getElementById('login-error')
+        const error = document.getElementById('login-error')
         error.style.display = this.error?'block':'none'
         error.innerText = this.error || ''
     },
@@ -24,14 +22,19 @@ var login = {
         if (e.what === 'init'){
             this.init()
         }
-        else if (e.what === 'doLogin'){
-            this.doLogin()
+        else if (e.what === 'loginFailed'){
+            this.error = strings[e.reason]
+            this.render()
         }
     },
 
     doLogin: async function(){
-        var email = document.getElementById('login-email').value.trim()
-        var password = document.getElementById('login-password').value.trim()
+        if (this.pending){
+            return
+        }
+
+        const email = document.getElementById('login-email').value.trim()
+        const password = document.getElementById('login-password').value.trim()
 
         if (email === '' || password === ''){
             this.error = strings.emailAndPasswordAreRequired
@@ -39,34 +42,15 @@ var login = {
             return
         }
 
-        this.pending = true;
-        this.error = null;
-        this.render();
+        this.error = null
+        this.render()
 
-        // wait till api response
-        try {
-            var response = await api.users.login(/*email, password*/"sophie.bluel@test.tld", "S0phie");
-            if (response.ok){
-                try {
-                    var credential = await response.json()
-                    authentication.setCredential(credential);
-                    window.location.href = 'index.html';
-                }
-                catch (err){
-                    console.log(err);
-                    this.error = strings.invalidServerResponse;
-                }
-            }
-            else {
-                this.error = strings.invalidUserOrPassword;
-            }
-        }
-        catch (err){
-            console.log(err)
-            this.error = strings.failedToFetch;
+        this.pending = true;
+        if (await authentication.login(email, password)){
+            window.location.href = 'index.html'
         }
         this.pending = false;
-        this.render();
+        this.render()
     }
 }
 

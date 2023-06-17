@@ -18,23 +18,23 @@ let editModify = {
             return;
         }
 
-        let div = document.createElement('div')
-        div.id = 'modify-works';
+        const div = document.createElement('div')
+        div.id = 'modify-works'
 
-        let i = document.createElement('i')
+        const i = document.createElement('i')
         i.className = 'fa-regular fa-pen-to-square'
         div.appendChild(i)
 
-        let p = document.createElement('p')
+        const p = document.createElement('p')
         p.innerText = 'modifier'
         div.appendChild(p)
 
-        var parent = document.getElementById('my-projects')
+        const parent = document.getElementById('my-projects')
         parent.appendChild(div)
 
         div.addEventListener('click', (e)=>{
-            e.preventDefault();
-            notifier.notify({what:'showEditWorksModal'});
+            e.preventDefault()
+            notifier.notify({what:'showEditWorksModal'})
         });
     },
 
@@ -45,4 +45,4 @@ let editModify = {
     }
 }
 
-notifier.addListener(editModify);
+notifier.addListener(editModify)

@@ -35,23 +35,23 @@ let editWorks = {
     deletePendings: {},
 
     renderModal: function(){
-        let content = editModal.initModal(false)
+        const content = editModal.initModal(false)
 
-        var h2 = document.createElement('h2')
+        const h2 = document.createElement('h2')
         h2.innerText = 'Galerie photo'
         content.appendChild(h2)
 
-        var div = document.createElement('div')
+        let div = document.createElement('div')
         div.id = "edit-works"
         content.appendChild(div)
 
         this.worksContainer = div
 
-        var div = document.createElement('div')
+        div = document.createElement('div')
         div.className = 'separator'
         content.appendChild(div)
 
-        var button = document.createElement('button')
+        let button = document.createElement('button')
         button.className = 'edit-work-add-button'
         button.innerText = 'Ajouter une photo'
         content.appendChild(button)
@@ -59,22 +59,22 @@ let editWorks = {
         button.addEventListener('click', (e)=>{
             e.preventDefault()
             notifier.notify({what: 'showAddPhotoModal'})
-        });
+        })
 
-        var button = document.createElement('button')
+        button = document.createElement('button')
         button.className = 'edit-work-delete-galery'
         button.innerText = 'Supprimer la galerie'
         content.appendChild(button)
     },
 
     renderWorks: async function(){
-        let works = await data.works.getWorks()
+        const works = await data.works.getWorks()
         if (works === null){
             // in case of error, dont display anything
             return;
         }
 
-        this.worksContainer.innerHTML = '';
+        this.worksContainer.innerHTML = ''
 
         works.forEach(work => {
             this.worksContainer.appendChild(this.renderWork(work))
@@ -82,15 +82,15 @@ let editWorks = {
     },
 
     renderWork: function(work){
-        let article = document.createElement('article')
+        const article = document.createElement('article')
         article.className = "edit-work-item"
 
-        let img = document.createElement('img')
+        const img = document.createElement('img')
         img.src = work.imageUrl
         img.alt = work.title
         article.appendChild(img)
 
-        let i = document.createElement('i')
+        const i = document.createElement('i')
         i.className = 'fa-solid fa-trash-can edit-work-trash-can'
         article.appendChild(i)
 
@@ -99,7 +99,7 @@ let editWorks = {
             this.deleteWork(work.id)
         })
 
-        let p = document.createElement('p')
+        const p = document.createElement('p')
         p.innerText = 'éditer'
         article.appendChild(p)
 

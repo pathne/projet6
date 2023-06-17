@@ -43,15 +43,15 @@ let addPhoto = {
     isFormValid: false,
 
     renderModal: async function(){
-        let categories = await data.categories.getCategories();
+        const categories = await data.categories.getCategories()
 
-        let content = editModal.initModal({what:'showEditWorksModal'})
+        const content = editModal.initModal({what:'showEditWorksModal'})
 
-        let h2 = document.createElement('h2')
+        const h2 = document.createElement('h2')
         h2.innerText = 'Ajout photo'
         content.appendChild(h2)
 
-        let form = document.createElement('form')
+        const form = document.createElement('form')
         form.action = '#'
 
         let input = document.createElement('input')
@@ -60,17 +60,17 @@ let addPhoto = {
         input.hidden = true
         form.appendChild(input)
 
-        this.fileInput = input;
+        this.fileInput = input
         input.addEventListener('input', (e)=>{
             this.previewImageFile()
             this.updateFormValidity()
-        });
+        })
 
         let div = document.createElement('div')
         div.id = 'add-file'
         form.appendChild(div)
 
-        this.imagePreview = div;
+        this.imagePreview = div
 
         let i = document.createElement('i')
         i.className = "fa-regular fa-image"
@@ -83,7 +83,7 @@ let addPhoto = {
         button.addEventListener('click', (e)=>{
             e.preventDefault();
             this.fileInput.click();
-        });
+        })
 
         let p = document.createElement('p')
         p.innerText = 'jpg, png : 4 mo max'
@@ -108,7 +108,7 @@ let addPhoto = {
         div2.appendChild(input)
 
         this.titleInput = input;
-        input.addEventListener('input', this.updateFormValidity.bind(this));
+        input.addEventListener('input', this.updateFormValidity.bind(this))
 
         div2 = document.createElement('div')
         div2.className = 'add-photo-input'
@@ -119,12 +119,12 @@ let addPhoto = {
         label.innerText = 'Catégorie'
         div2.appendChild(label)
 
-        let select = document.createElement('select')
+        const select = document.createElement('select')
         select.id = 'input-category'
         div2.appendChild(select)
 
-        this.categoriesSelect = select;
-        select.addEventListener('input', this.updateFormValidity.bind(this));
+        this.categoriesSelect = select
+        select.addEventListener('input', this.updateFormValidity.bind(this))
 
         let option = document.createElement('option')
         option.value = -1
@@ -146,12 +146,11 @@ let addPhoto = {
         form.appendChild(div)
 
         button = document.createElement('button')
-
         button.className = 'add-photo-validate'
         button.innerText = 'Valider'
         form.appendChild(button)
 
-        this.submitButton = button;
+        this.submitButton = button
         button.addEventListener('click', (e)=>{
             e.preventDefault()
             this.addWork()
@@ -161,15 +160,16 @@ let addPhoto = {
     },
 
     previewImageFile: function(){
-        this.imagePreview.innerHTML = '';
-        let img = document.createElement('img');
-        img.src = URL.createObjectURL(this.fileInput.files[0]);
-        img.alt = 'image du projet';
+        this.imagePreview.innerHTML = ''
+
+        const img = document.createElement('img')
+        img.src = URL.createObjectURL(this.fileInput.files[0])
+        img.alt = 'image du projet'
         this.imagePreview.appendChild(img);
     },
 
     updateFormValidity: function(){
-        var isFormValid =
+        const isFormValid =
             this.fileInput.files.length > 0 &&
             this.titleInput.value.trim().length > 0 &&
             parseInt(this.categoriesSelect.value, 10) !== -1
@@ -181,7 +181,7 @@ let addPhoto = {
 
     addWork: async function(){
         if (!this.isFormValid){
-            notifier.notify({what:'addPhotoFieldsRequiredError'});
+            notifier.notify({what:'addPhotoFieldsRequiredError'})
             return;
         }
         if (await data.works.addWork(this.fileInput.files[0], this.titleInput.value.trim(), parseInt(this.categoriesSelect.value))){

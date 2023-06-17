@@ -13,26 +13,26 @@ let editHeader = {
     render: function(){
         // display header only if user is authenticated
         if (!authentication.isLogged()){
-            return;
+            return
         }
 
-        var div0 = document.createElement('div')
+        const div0 = document.createElement('div')
         div0.className = 'edit-header edit-header-visible'
 
-        var i = document.createElement('i')
+        const i = document.createElement('i')
         i.className = "fa-regular fa-pen-to-square"
-        div0.appendChild(i);
+        div0.appendChild(i)
 
-        var p = document.createElement('p')
+        const p = document.createElement('p')
         p.innerText = 'Mode édition'
-        div0.appendChild(p);
+        div0.appendChild(p)
 
-        var div1 = document.createElement('div')
+        const div1 = document.createElement('div')
         div1.className = 'edit-header-publish'
         div1.innerText = 'publier les changements'
-        div0.appendChild(div1);
+        div0.appendChild(div1)
 
-        let body = document.body
+        const body = document.body
         body.insertBefore(div0, body.children[0])
     },
 
@@ -43,4 +43,4 @@ let editHeader = {
     }
 };
 
-notifier.addListener(editHeader);
+notifier.addListener(editHeader)

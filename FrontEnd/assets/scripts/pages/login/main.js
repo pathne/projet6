@@ -1,2 +1,2 @@
 
-notifier.notify({what:'init'});
+notifier.notify({what:'init'})

@@ -8,7 +8,7 @@ let categoryFilter = {
             return;
         }
 
-        let container = document.getElementById('category-filter')
+        const container = document.getElementById('category-filter')
         container.innerHTML = ''
 
         const categories = await data.works.getWorksCategories()
@@ -25,7 +25,7 @@ let categoryFilter = {
     },
 
     renderCategory: function(category){
-        let li = document.createElement('li')
+        const li = document.createElement('li')
         li.className = category.id === this.categoryId?'filter filter-on':'filter'
         li.innerText = category.name
 
