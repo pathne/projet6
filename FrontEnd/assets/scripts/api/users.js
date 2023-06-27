@@ -2,7 +2,7 @@
 api.users = {
     login: async function(email, password){
         try {
-            const response = await fetch('http://localhost:5678/api/users/login', {
+            const response = await fetch(api.endPoint+'/api/users/login', {
                 method: "POST",
                 cache: "no-cache",
                 headers: {

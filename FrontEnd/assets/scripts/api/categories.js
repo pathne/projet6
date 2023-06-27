@@ -2,7 +2,7 @@
 api.categories = {
     getCategories: async function(){
         try {
-            const response = await fetch('http://localhost:5678/api/categories')
+            const response = await fetch(api.endPoint+'/api/categories')
             if (response.ok){
                 return await response.json()
             }

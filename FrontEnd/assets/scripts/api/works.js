@@ -2,7 +2,7 @@
 api.works = {
     getWorks: async function(){
         try {
-            const response = await fetch('http://localhost:5678/api/works')
+            const response = await fetch(api.endPoint+'/api/works')
             if (response.ok){
                 return await response.json()
             }
@@ -16,7 +16,7 @@ api.works = {
     deleteWork: async function(id){
         const credential = authentication.getCredential();
         try {
-            const response = await fetch('http://localhost:5678/api/works/'+id, {
+            const response = await fetch(api.endPoint+'/api/works/'+id, {
                 method: "DELETE",
                 cache: "no-cache",
                 headers: {
@@ -47,7 +47,7 @@ api.works = {
 
         const credential = authentication.getCredential()
         try {
-            const response = await fetch('http://localhost:5678/api/works', {
+            const response = await fetch(api.endPoint+'/api/works', {
                 method: "POST",
                 cache: "no-cache",
                 headers: {
